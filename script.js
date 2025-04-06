@@ -2,6 +2,7 @@ let expenses = [];
 let totalAmount = 0;
 
 const categorySelect = document.getElementById('category-select');
+const description = document.getElementById('description');
 const amountInput = document.getElementById('amount-input');
 const dateInput = document.getElementById('date-input');
 const btn = document.getElementById('add-btn');
@@ -10,11 +11,16 @@ const totalAmountCell = document.getElementById('total-amount');
 
 addBtn.addEventListener('click', function() {
     const category = categorySelect.ariaValueMax;
+    const description = description.value;
     const amount = Number(amountInput.value);
     const date = dateInput.value;
 
     if(category === '') {
-        alert('Please selct a category');
+        alert('Please select a category');
+        return;
+    }
+    if(description === '') {
+        alert('Please enter an appropriate description');
         return;
     }
     if (isNaN(amount) || amount <=0) {
@@ -22,7 +28,7 @@ addBtn.addEventListener('click', function() {
         return;
     }
     if (date === '') {
-        alert('Please slect a date');
+        alert('Please select a date');
         return;
     }
     expenses.push({category, amount, date});
@@ -33,6 +39,7 @@ addBtn.addEventListener('click', function() {
     const newRow = expensesTableBody.insertRow();
 
     const categoryCell = newRow.insertCell();
+    const descriptionCell = newRow.insertCell();
     const amountCell = newRow.insertCell();
     const dateCell = newRow.insertCell();
     const deleteCell = newRow.insertCell();
@@ -51,9 +58,10 @@ addBtn.addEventListener('click', function() {
 
     const expense = expenses[expenses.length - 1];
     categoryCell.textContent = expense.category;
+    descriptionCell.textContent = expense.description;
     amountCell.textContent = expense.amount;
     dateCell.textContent = expense.date;
-    deleteCell.appendChild(delete.Btn);
+    deleteCell.appendChild(deleteBtn);
 });
 
 //Used to update the table
@@ -61,8 +69,8 @@ for (const expense of expenses) {
     totalAmount += expense.amount;
     totalAmountCell.textContent = totalAmount;
 
-    const newRow = expensesTableBody.insertRow();
     const categoryCell = newRow.insertCell();
+    const descriptionCell = newRow.insertCell();
     const amountCell = newRow.insertCell();
     const dateCell = newRow.insertCell();
     const deleteCell = newRow.insertCell();
@@ -80,7 +88,8 @@ for (const expense of expenses) {
     });
 
     categoryCell.textContent = expense.category;
+    descriptionCell.textContent = expense.description;
     amountCell.textContent = expense.amount;
     dateCell.textContent = expense.date;
-    deleteCell.appendChild(delete.Btn);
+    deleteCell.appendChild(deleteBtn);
 }
