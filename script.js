@@ -2,7 +2,7 @@ let expenses = [];
 let totalAmount = 0;
 
 const categorySelect = document.getElementById('category-select');
-const description = document.getElementById('description');
+const descriptionInput = document.getElementById('description');
 const amountInput = document.getElementById('amount-input');
 const dateInput = document.getElementById('date-input');
 const btn = document.getElementById('add-btn');
@@ -11,7 +11,7 @@ const totalAmountCell = document.getElementById('total-amount');
 
 addBtn.addEventListener('click', function() {
     const category = categorySelect.ariaValueMax;
-    const description = description.value;
+    const description = descriptionInput.value;
     const amount = Number(amountInput.value);
     const date = dateInput.value;
 

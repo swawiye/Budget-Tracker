@@ -9,24 +9,30 @@
 <body>
     <h1>Budget tracker</h1>
     <div class="input-section">
-        <label for="category-select">Category</label>
-        <select id="category-select">
-            <option value="Food & Beverage">Food and beverages</option>
-            <option value="Rent">Rent</option>
-            <option value="Transport">Transport</option>
-            <option value="Relaxing">Relaxing</option>
-        </select>
-
-        <label for="description">Description</label>
-        <input type="text" id="description">
-
-        <label for="amount-input">Amount</label>
-        <input type="number" id="amount-input">
-
-        <label for="date-input">Date</label>
-        <input type="date" id="date-input">
-
-        <button id="add-btn">Add</button>
+        <ul>
+            <li>
+                <label for="category-select">Category</label>
+                <select id="category-select">
+                    <option value="income">Income</option>
+                    <option value="expenses">Expense</option>
+                </select>
+            </li>
+            <li>
+                <label for="description">Description</label>
+                <input type="text" id="description">
+            </li>
+            <li>
+                <label for="amount-input">Amount</label>
+                <input type="number" id="amount-input">
+            </li>
+            <li>
+                <label for="date-input">Date</label>
+                <input type="date" id="date-input">
+            </li>
+            <li>
+                <button id="add-btn">Add transaction</button>
+            </li>
+        </ul>
     </div>
 
     <div class="expenses-list">
@@ -54,6 +60,6 @@
             </tfoot>
         </table>
     </div>
-    <script type="text/javascript" src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

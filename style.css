@@ -1,73 +1,108 @@
-* {
-  padding: 0;
-  margin: 0;
+*{
+padding: 0;
+margin: 0;
 }
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-  }
-  
-  h1, h2 {
-    text-align: center;
-  }
-  
-  .input-section {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-  }
-  
-  .input-section label {
-    font-weight: bold;
-    margin-right: 10px;
-  }
-  
-  .input-section input[type="number"], .input-section input[type="date"] {
-    padding: 5px;
-    margin-right: 10px;
-  }
-  
-  .input-section button {
-    padding: 5px 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .expenses-list {
-    margin: 20px;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  tfoot td {
-    font-weight: bold;
-  }
-  
-  .delete-btn {
-    padding: 5px 10px;
-    background-color: #f44336;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
+  font-family: 'Times New Roman', Times, serif;
+  margin: 0;
+  background-color: beige;
+}
+
+h1 {
+  text-align: center;
+  background-color: darkkhaki;
+  color: beige;
+  padding: 20px;
+  font-size: 35px;
+  text-transform: uppercase;
+}
+
+.input-section {
+  background-color: white;
+  display: flex;
+  text-align: center;
+  width: 350px;
+  height: 300px;
+  margin: 30px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:40px 10px;
+}
+
+ul {
+  list-style: none;
+  text-align: center;
+}
+
+ul li {
+  padding: 20px;
+  display: inline-block;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.input-section label {
+  font-weight: bold;
+  margin-right: 10px;
+  font-size: large;
+}
+
+.input-section input[type="text"], .input-section input[type="number"], .input-section input[type="date"] {
+  padding: 10px 10px;
+  margin-right: 10px;
+}
+
+.input section .category-select {
+  padding: 10px 10px;
+  margin-right: 10px;
+}
+
+.input-section button {
+  padding: 10px 12px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: large;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.expenses-list {
+  margin: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: darkkhaki;
+  color: white;
+}
+
+tfoot td {
+  font-weight: bold;
+}
+
+.delete-btn {
+  padding: 5px 10px;
+  background-color: darkred;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
   
