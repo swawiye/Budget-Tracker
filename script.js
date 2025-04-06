@@ -5,7 +5,7 @@ const categorySelect = document.getElementById('category-select');
 const descriptionInput = document.getElementById('description');
 const amountInput = document.getElementById('amount-input');
 const dateInput = document.getElementById('date-input');
-const btn = document.getElementById('add-btn');
+const addBtn = document.getElementById('add-btn');
 const expensesTableBody = document.getElementById('expenses-table-body');
 const totalAmountCell = document.getElementById('total-amount');
 
@@ -15,6 +15,7 @@ addBtn.addEventListener('click', function() {
     const amount = Number(amountInput.value);
     const date = dateInput.value;
 
+    //Input validation
     if(category === '') {
         alert('Please select a category');
         return;
@@ -24,18 +25,22 @@ addBtn.addEventListener('click', function() {
         return;
     }
     if (isNaN(amount) || amount <=0) {
-        alert('Please enter a valid number');
+        alert('Please enter a valid amount');
         return;
     }
     if (date === '') {
         alert('Please select a date');
         return;
     }
-    expenses.push({category, amount, date});
 
+    //Create expense object
+    expenses.push({category, description, amount, date});
+
+    //Update the total amount
     totalAmount += amount;
     totalAmountCell.textContent = totalAmount;
 
+    //Create a new row in the table
     const newRow = expensesTableBody.insertRow();
 
     const categoryCell = newRow.insertCell();
@@ -48,15 +53,17 @@ addBtn.addEventListener('click', function() {
     deleteBtn.textContent = 'Delete';
     deleteBtn.classList.add('delete-btn');
     deleteBtn.addEventListener('click', function() {
-        expenses.splice(expenses.indexOf(expense), 1);
-
-        totalAmount -= expense.amount;
-        totalAmountCell.textContent = totalAmount;
-
-        expensesTableBody.removeChild(newRow);
+        // Remove the expense from the array and update the total amount
+        const index = expenses.indexOf(expense);
+        if (index !== -1) {
+            expenses.splice(index, 1);
+            totalAmount -= expense.amount;
+            totalAmountCell.textContent = totalAmount;
+            expensesTableBody.removeChild(newRow);
+        }
     });
 
-    const expense = expenses[expenses.length - 1];
+    // Set the content of the table cells
     categoryCell.textContent = expense.category;
     descriptionCell.textContent = expense.description;
     amountCell.textContent = expense.amount;
@@ -64,6 +71,7 @@ addBtn.addEventListener('click', function() {
     deleteCell.appendChild(deleteBtn);
 });
 
+/*
 //Used to update the table
 for (const expense of expenses) {
     totalAmount += expense.amount;
@@ -92,4 +100,5 @@ for (const expense of expenses) {
     amountCell.textContent = expense.amount;
     dateCell.textContent = expense.date;
     deleteCell.appendChild(deleteBtn);
-}
+};
+*/
