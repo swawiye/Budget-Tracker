@@ -1,6 +1,11 @@
 let expenses = [];
 let totalAmount = 0;
 
+//'window'- for the webpage
+window.onload = function () {
+    loadExpenseCookies();
+};
+
 const categorySelect = document.getElementById('category-select');
 const descriptionInput = document.getElementById('description');
 const amountInput = document.getElementById('amount-input');
@@ -130,19 +135,51 @@ function updateTable() {
 // Call updateTable on page load to show any existing expenses
 updateTable();
 
-/*
-//Cookie implementation 
-function WriteCookie() {
-    const value = document.querySelector('[name=transaction]').value;
-    if (!value) {
-        alert("Enter relevant values");
-        return;
+//COOKIES
+// Set the expiry of a cookie(typically lasts a year)- Expiry = 60 * 60 * 24 * 365
+//Domain- example.com
+//Path- /(means the root)
+//Secure- 'http://'(insecure site), 'https://'(secure site) 
+
+document.getElementsById('transaction-form').addEventListener('button', function (e) {
+    e.preventDefault();//Prevents reloading of the page on submission of the form
+    const category = document.getElementById('category-select').value;
+    const description = document.getElementById('description').value.trim();//Remove the whitespaces
+    const rawAmount = parseFloat(document.getElementById('amount-input').value);
+    const date = document.getElementById('date-input').value;
+
+    if (!description || isNaN(rawAmount)) return;
+    const amount = category === 'expense' ? -Math.abs(rawAmount) : Math.abs(rawAmount);
+
+    const transaction = {
+        id: Date.now(), //set an ID for each item
+        description,
+        amount,
+        date,
+    };
+
+    expenses.push(transaction);
+    saveExpensesToCookies();
+    loadExpenseCookies();
+});
+
+function saveExpensesToCookies() {
+    //Saving the cookies
+    document.cookie = `
+    expenses=${JSON.stringify(expenses)}; 
+    path=/;
+    max-age=3600;` //'transactions'- the key, 'path'- setting the path, 'max-age'- setting the expiry, 'JSON'- set the cookie into strings
+};
+
+function loadExpenseCookies() {
+    const cookie = document.cookie.split('; ').find(row => row.startsWith('expenses='));
+    if(cookie) {
+        expenses = JSON.parse(cookie.split('=')[1]);
+        expenses = []; //set up an empty array that will store the cookies
     }
-    const cookieValue = esc(value);
-    document.cookie = "name=" + cookieValue;
-    document.write("Setting Cookie: name=" + cookieValue);
-}
-*/    
+};
+console.log(expenses);
+  
 
 
 

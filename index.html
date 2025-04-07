@@ -9,7 +9,7 @@
 <body>
     <h1>Budget tracker</h1>
     <div class="input-section">
-        <ul>
+        <ul id="transaction-form">
             <li>
                 <label for="category-select">Category</label>
                 <select id="category-select" name="transaction">
@@ -23,14 +23,14 @@
             </li>
             <li>
                 <label for="amount-input">Amount</label>
-                <input type="number" id="amount-input" name="transaction">
+                <input type="number" id="amount-input" name="transaction" placeholder="Enter the amount in kshs">
             </li>
             <li>
                 <label for="date-input">Date</label>
                 <input type="date" id="date-input" name="transaction">
             </li>
             <li>
-                <button type="button" id="add-btn" onclick="WriteCookie()">Add transaction</button>
+                <button type="button" id="add-btn" onclick="loadExpenseCookies()">Add transaction</button>
             </li>
         </ul>
     </div>
