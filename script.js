@@ -51,56 +51,86 @@ addBtn.addEventListener('click', function() {
     const amountCell = newRow.insertCell();
     const dateCell = newRow.insertCell();
     const deleteCell = newRow.insertCell();
-    const deleteBtn = document.createElement('button');
 
+    //Create a delete button for its row
+    const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Delete';
     deleteBtn.classList.add('delete-btn');
+
+    //Delete button functionality
     deleteBtn.addEventListener('click', function() {
-        // Remove the expense from the array and update the total amount
+        //Find the index of the expense to delete
         const index = expenses.indexOf(expense);
         if (index !== -1) {
+            //Remove the expense from the arrat
             expenses.splice(index, 1);
+            //Update the total amount
             totalAmount -= expense.amount;
-            totalAmountCell.textContent = totalAmount;
+            totalAmountCell.textContent = totalAmount.toFixed(2);
+            //Remove the row from the table
             expensesTableBody.removeChild(newRow);
         }
     });
 
+    //Append delete button to the delete cell
+    deleteCell.appendChild(deleteBtn);
+
     // Set the content of the table cells
     categoryCell.textContent = expense.category;
     descriptionCell.textContent = expense.description;
-    amountCell.textContent = expense.amount;
+    amountCell.textContent = expense.amount.toFixed(2);
     dateCell.textContent = expense.date;
-    deleteCell.appendChild(deleteBtn);
 });
 
 
-//Used to update the table
-for (const expense of expenses) {
-    totalAmount += expense.amount;
-    totalAmountCell.textContent = totalAmount;
+//Update the table with existing transactions
+function updateTable() {
+    expensesTableBody.innerHTML = '';  // Clear the table first
+    totalAmount = 0;  // Reset the total amount
 
-    const categoryCell = newRow.insertCell();
-    const descriptionCell = newRow.insertCell();
-    const amountCell = newRow.insertCell();
-    const dateCell = newRow.insertCell();
-    const deleteCell = newRow.insertCell();
-    const deleteBtn = document.createElement('button');
+    // Loop through all transactions and add them to the table
+    for (const expense of expenses) {
+        // Create a new row in the table
+        const newRow = expensesTableBody.insertRow();
 
-    deleteBtn.textContent = 'Delete';
-    deleteBtn.classList.add('delete-btn');
-    deleteBtn.addEventListener('click', function() {
-        expenses.splice(expenses.indexOf(expense), 1);
+        const categoryCell = newRow.insertCell();
+        const descriptionCell = newRow.insertCell();
+        const amountCell = newRow.insertCell();
+        const dateCell = newRow.insertCell();
+        const deleteCell = newRow.insertCell();
+        const deleteBtn = document.createElement('button');
 
-        totalAmount -= expense.amount;
-        totalAmountCell.textContent = totalAmount;
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.classList.add('delete-btn');
+        
+        deleteBtn.addEventListener('click', function() {
+            // Remove the expense from the array
+            const index = expenses.indexOf(expense);
+            if (index !== -1) {
+                expenses.splice(index, 1);
+                totalAmount -= expense.amount;
+                totalAmountCell.textContent = totalAmount.toFixed(2);
+                expensesTableBody.removeChild(newRow);
+            }
+        });
 
-        expensesTableBody.removeChild(newRow);
-    });
+        // Set the content of the table cells
+        categoryCell.textContent = expense.category;
+        descriptionCell.textContent = expense.description;
+        amountCell.textContent = expense.amount.toFixed(2);
+        dateCell.textContent = expense.date;
+        deleteCell.appendChild(deleteBtn);
+    }
 
-    categoryCell.textContent = expense.category;
-    descriptionCell.textContent = expense.description;
-    amountCell.textContent = expense.amount;
-    dateCell.textContent = expense.date;
-    deleteCell.appendChild(deleteBtn);
-};
+    totalAmountCell.textContent = totalAmount.toFixed(2);
+}
+
+// Call updateTable on page load to show any existing expenses
+updateTable();
+
+
+
+
+
+
+
