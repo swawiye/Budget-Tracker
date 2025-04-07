@@ -130,6 +130,19 @@ function updateTable() {
 // Call updateTable on page load to show any existing expenses
 updateTable();
 
+/*
+//Cookie implementation 
+function WriteCookie() {
+    const value = document.querySelector('[name=transaction]').value;
+    if (!value) {
+        alert("Enter relevant values");
+        return;
+    }
+    const cookieValue = esc(value);
+    document.cookie = "name=" + cookieValue;
+    document.write("Setting Cookie: name=" + cookieValue);
+}
+*/    
 
 
 
