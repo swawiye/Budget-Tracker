@@ -9,6 +9,7 @@ const addBtn = document.getElementById('add-btn');
 const expensesTableBody = document.getElementById('expenses-table-body');
 const totalAmountCell = document.getElementById('total-amount');
 
+//Add transaction button
 addBtn.addEventListener('click', function() {
     const category = categorySelect.ariaValueMax;
     const description = descriptionInput.value;
@@ -34,7 +35,8 @@ addBtn.addEventListener('click', function() {
     }
 
     //Create expense object
-    expenses.push({category, description, amount, date});
+    const expense = {category, description, amount, date};
+    expenses.push(expense);
 
     //Update the total amount
     totalAmount += amount;
@@ -43,6 +45,7 @@ addBtn.addEventListener('click', function() {
     //Create a new row in the table
     const newRow = expensesTableBody.insertRow();
 
+    //Insert table cells for each property
     const categoryCell = newRow.insertCell();
     const descriptionCell = newRow.insertCell();
     const amountCell = newRow.insertCell();
@@ -71,7 +74,7 @@ addBtn.addEventListener('click', function() {
     deleteCell.appendChild(deleteBtn);
 });
 
-/*
+
 //Used to update the table
 for (const expense of expenses) {
     totalAmount += expense.amount;
@@ -101,4 +104,3 @@ for (const expense of expenses) {
     dateCell.textContent = expense.date;
     deleteCell.appendChild(deleteBtn);
 };
-*/
