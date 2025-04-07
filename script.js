@@ -61,7 +61,7 @@ addBtn.addEventListener('click', function() {
     
     // Create a delete button for this row
     const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'Delete';
+    deleteBtn.textContent = ' X ';
     deleteBtn.classList.add('delete-btn');
 
     // Delete button functionality
@@ -107,7 +107,7 @@ function updateTable() {
         const deleteCell = newRow.insertCell();
         const deleteBtn = document.createElement('button');
 
-        deleteBtn.textContent = 'Delete';
+        deleteBtn.textContent = ' X ';
         deleteBtn.classList.add('delete-btn');
         
         deleteBtn.addEventListener('click', function() {
@@ -127,6 +127,7 @@ function updateTable() {
         amountCell.textContent = expense.amount.toFixed(2);
         dateCell.textContent = expense.date;
         deleteCell.appendChild(deleteBtn);
+
     }
 
     totalAmountCell.textContent = totalAmount.toFixed(2);
@@ -141,7 +142,7 @@ updateTable();
 //Path- /(means the root)
 //Secure- 'http://'(insecure site), 'https://'(secure site) 
 
-document.getElementsById('transaction-form').addEventListener('button', function (e) {
+document.getElementById('transaction-form').addEventListener('button', function (e) {
     e.preventDefault();//Prevents reloading of the page on submission of the form
     const category = document.getElementById('category-select').value;
     const description = document.getElementById('description').value.trim();//Remove the whitespaces
@@ -168,14 +169,13 @@ function saveExpensesToCookies() {
     document.cookie = `
     expenses=${JSON.stringify(expenses)}; 
     path=/;
-    max-age=3600;` //'transactions'- the key, 'path'- setting the path, 'max-age'- setting the expiry, 'JSON'- set the cookie into strings
+    max-age=60*60*24*7;` //'transactions'- the key, 'path'- setting the path, 'max-age'- setting the expiry, 'JSON'- set the cookie into strings
 };
 
 function loadExpenseCookies() {
     const cookie = document.cookie.split('; ').find(row => row.startsWith('expenses='));
     if(cookie) {
         expenses = JSON.parse(cookie.split('=')[1]);
-        expenses = []; //set up an empty array that will store the cookies
     }
 };
 console.log(expenses);
