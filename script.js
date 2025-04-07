@@ -9,23 +9,23 @@ const addBtn = document.getElementById('add-btn');
 const expensesTableBody = document.getElementById('expenses-table-body');
 const totalAmountCell = document.getElementById('total-amount');
 
-//Add transaction button
+// Add transaction button
 addBtn.addEventListener('click', function() {
-    const category = categorySelect.ariaValueMax;
+    const category = categorySelect.value; // Select category (Income or Expense)
     const description = descriptionInput.value;
     const amount = Number(amountInput.value);
     const date = dateInput.value;
 
-    //Input validation
-    if(category === '') {
+    // Input validation
+    if (category === '') {
         alert('Please select a category');
         return;
     }
-    if(description === '') {
+    if (description === '') {
         alert('Please enter an appropriate description');
         return;
     }
-    if (isNaN(amount) || amount <=0) {
+    if (isNaN(amount) || amount <= 0) {
         alert('Please enter a valid amount');
         return;
     }
@@ -34,45 +34,47 @@ addBtn.addEventListener('click', function() {
         return;
     }
 
-    //Create expense object
-    const expense = {category, description, amount, date};
+    // Create expense object
+    const expense = { category, description, amount, date };
+
+    // Add the expense to the expenses array
     expenses.push(expense);
 
-    //Update the total amount
+    // Update the total amount
     totalAmount += amount;
-    totalAmountCell.textContent = totalAmount;
+    totalAmountCell.textContent = totalAmount.toFixed(2);
 
-    //Create a new row in the table
+    // Create a new row in the table
     const newRow = expensesTableBody.insertRow();
 
-    //Insert table cells for each property
+    // Insert table cells for each property
     const categoryCell = newRow.insertCell();
     const descriptionCell = newRow.insertCell();
     const amountCell = newRow.insertCell();
     const dateCell = newRow.insertCell();
     const deleteCell = newRow.insertCell();
-
-    //Create a delete button for its row
+    
+    // Create a delete button for this row
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Delete';
     deleteBtn.classList.add('delete-btn');
 
-    //Delete button functionality
+    // Delete button functionality
     deleteBtn.addEventListener('click', function() {
-        //Find the index of the expense to delete
+        // Find the index of the expense to delete
         const index = expenses.indexOf(expense);
         if (index !== -1) {
-            //Remove the expense from the arrat
+            // Remove the expense from the array
             expenses.splice(index, 1);
-            //Update the total amount
+            // Update the total amount
             totalAmount -= expense.amount;
             totalAmountCell.textContent = totalAmount.toFixed(2);
-            //Remove the row from the table
+            // Remove the row from the table
             expensesTableBody.removeChild(newRow);
         }
     });
 
-    //Append delete button to the delete cell
+    // Append delete button to the delete cell
     deleteCell.appendChild(deleteBtn);
 
     // Set the content of the table cells
@@ -83,9 +85,9 @@ addBtn.addEventListener('click', function() {
 });
 
 
-//Update the table with existing transactions
+// Update the table with existing expenses on page load
 function updateTable() {
-    expensesTableBody.innerHTML = '';  // Clear the table first
+    expensesTableBody.innerHTML = '';  // Clear the table
     totalAmount = 0;  // Reset the total amount
 
     // Loop through all transactions and add them to the table
@@ -127,6 +129,7 @@ function updateTable() {
 
 // Call updateTable on page load to show any existing expenses
 updateTable();
+
 
 
 
